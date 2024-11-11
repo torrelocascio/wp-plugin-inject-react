@@ -1,103 +1,124 @@
 <?php
 
 /**
-* Does one thing well.
-*
-* @link       http://example.com
-* @since      1.0.0
-*
-* @package    plugin-name
-* @subpackage plugin-name/public/module
-*/
+ * Does one thing well.
+ *
+ * @link       http://example.com
+ * @since      1.0.0
+ *
+ * @package    plugin-name
+ * @subpackage plugin-name/public/module
+ */
 
 /**
-* Does one thing well.
-*
-* Here's the description of how it does it.
-*
-* @package    plugin-name
-* @subpackage plugin-name/public/module
-* @author     Your Name <email@example.com>
-*/
-class Plugin_Abbr_Public_Module {
+ * Does one thing well.
+ *
+ * Here's the description of how it does it.
+ *
+ * @package    plugin-name
+ * @subpackage plugin-name/public/module
+ * @author     Your Name <email@example.com>
+ */
+class Plugin_Abbr_Public_Module
+{
 
     /**
-    * The ID of this plugin.
-    *
-    * @since    1.0.0
-    * @access   private
-    * @var      string    $plugin_title    The ID of this plugin.
-    */
+     * The ID of this plugin.
+     *
+     * @since    1.0.0
+     * @access   private
+     * @var      string    $plugin_title    The ID of this plugin.
+     */
     private $plugin_title;
 
     /**
-    * The version of this plugin.
-    *
-    * @since    1.0.0
-    * @access   private
-    * @var      string    $version    The current version of this plugin.
-    */
+     * The version of this plugin.
+     *
+     * @since    1.0.0
+     * @access   private
+     * @var      string    $version    The current version of this plugin.
+     */
     private $version;
 
 
     /**
-    * Initialize the class and set its properties.
-    *
-    * @since    1.0.0
-    * @param      string    $plugin_title       The name of the plugin.
-    * @param      string    $version    The version of this plugin.
-    */
-    public function __construct( $plugin_title, $version ) {
+     * Initialize the class and set its properties.
+     *
+     * @since    1.0.0
+     * @param      string    $plugin_title       The name of the plugin.
+     * @param      string    $version    The version of this plugin.
+     */
+    public function __construct($plugin_title, $version)
+    {
 
         $this->plugin_title = $plugin_title;
         $this->version = $version;
-
     }
 
-        /**
-    * Render a view before the content.
-    * Different hooks will require separate render_{} methods.
-    *
-    * @since    1.0.0
-    */
+    /**
+     * Render a view before the content.
+     * Different hooks will require separate render_{} methods.
+     *
+     * @since    1.0.0
+     */
 
-    public function get_user_kyc() {
+    public function get_user_kyc()
+    {
         $user = wp_get_current_user();
-        $kyc_status = get_user_meta($user->ID,'kyc_status',TRUE);
+        $kyc_status = get_user_meta($user->ID, 'kyc_status', TRUE);
         $kyc_status = !empty($kyc_status) ?  $kyc_status : 'Does not exist';
         echo "<h2>$kyc_status</h2>";
-        
     }
 
 
 
     /**
-    * Render a view before the content.
-    * Different hooks will require separate render_{} methods.
-    *
-    * @since    1.0.0
-    */
-    public function render_view_before_content( $content ) {
+     * Render a view before the content.
+     * Different hooks will require separate render_{} methods.
+     *
+     * @since    1.0.0
+     */
+    public function render_view_before_content($content)
+    {
 
-      $view = file_get_contents( plugin_dir_path( __FILE__ ) . 'views/view-name.php' );
+        $view = file_get_contents(plugin_dir_path(__FILE__) . 'views/view-name.php');
 
-      return $view . $content;
-
+        return $view . $content;
     }
 
 
     /**
-    * Do a thing.
-    *
-    * @since    1.0.0
-    * @param      string    $your_param       Param description.
-    * @return     string    $return_var       The var this method returns.
-    */
-    public function method( $your_param ) {
+     * Do a thing.
+     *
+     * @since    1.0.0
+     * @param      string    $your_param       Param description.
+     * @return     string    $return_var       The var this method returns.
+     */
+    public function method($your_param)
+    {
 
         // Do the thing.
 
     }
+
+
+
+    /**
+     * Return the frame div for the 'realt_portfolio' shortcode.
+     *
+     * @since    1.0.0
+     */
+    public function get_injected_frame()
+    {
+
+        return '<div id="inject-react-frame">
+              <div>
+                <span>React App</span>
+              </div>
+            </div>';
+    }
+
+
 
 
 }

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled, { keyframes } from "styled-components";
 import axios from "axios";
+import utils from "../../utils";
 
 // Styled components for styling the form
 const FormContainer = styled.div`
@@ -77,7 +78,15 @@ const Spinner = styled.div`
 `;
 
 function UpdateForm() {
-  const [formData, setFormData] = useState({ name: "", email: "" });
+  let { food, drink } = utils.getWindowData(
+    'inject_react_user_data'
+  );
+
+  let startingFormData = {
+    food: food,
+    drink: drink,
+  };
+  const [formData, setFormData] = useState(startingFormData);
   const [message, setMessage] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
   const [loading, setLoading] = useState(false); // New loading state
@@ -89,8 +98,12 @@ function UpdateForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true); // Start loading spinner
+
     try {
-      const response = await fetchWP(ajax_url, formData);
+      const response = await utils.fetchWP(
+        formData,
+        "update_favorite_food_and_drink"
+      );
       if (response.result !== "success") {
         throw new Error(response.message);
       }
@@ -106,23 +119,23 @@ function UpdateForm() {
 
   return (
     <FormContainer>
-      <Title>Contact Us</Title>
+      <Title>Submit Form</Title>
       <form onSubmit={handleSubmit}>
-        <Label htmlFor="name">Name</Label>
+        <Label htmlFor="drink">Favorite Drink</Label>
         <Input
           type="text"
-          id="name"
-          name="name"
-          value={formData.name}
+          id="drink"
+          name="drink"
+          value={formData.drink}
           onChange={handleChange}
           required
         />
-        <Label htmlFor="email">Email</Label>
+        <Label htmlFor="food">Favorite Food</Label>
         <Input
-          type="email"
-          id="email"
-          name="email"
-          value={formData.email}
+          type="text"
+          id="food"
+          name="food"
+          value={formData.food}
           onChange={handleChange}
           required
         />

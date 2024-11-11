@@ -1,11 +1,12 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import TheForm from './components/form/index.jsx';
 
 function App() {
   console.log('react app has loaded');
   return (
-    <div className="App" id="root">
+    <div className="App" id="inject-react-frame">
       {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
@@ -22,9 +23,7 @@ function App() {
       </header> */}
 
       <h3>Inject React Form</h3>
-      <div>
-        
-      </div>
+      <TheForm/>
     </div>
   );
 }

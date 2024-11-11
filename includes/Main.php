@@ -332,9 +332,12 @@ class Plugin_Name {
         // Standard hooks go here:
         //$this->loader->add_action( 'add_meta_boxes{_post_type}', $module->element, 'render_metabox' );
         //$this->loader->add_action( 'save_post{_post_type}', $module->element, 'save_metabox' );
-        $this->loader->add_action( 'wp_body_open', $module, 'render_view_before_content' );
+        // $this->loader->add_action( 'wp_body_open', $module, 'render_view_before_content' );
 
-        $this->loader->add_action('wp_footer', $module, 'get_user_kyc');
+        // $this->loader->add_action('wp_footer', $module, 'get_user_kyc');
+
+        add_shortcode('injected-react', [$module, 'get_injected_frame']); // Also includes sell-tokens frame.
+
 
     }
 
@@ -354,11 +357,12 @@ class Plugin_Name {
         $this->loader->add_filter( 'the_content', $module_ajax, 'render_view_before_content' );
 
         // Data to frontend here with wp_localize_script():
-        $this->loader->add_action( 'wp_enqueue_scripts', $module_ajax, 'change_user_meta' );
+        $this->loader->add_action( 'wp_enqueue_scripts', $module_ajax, 'send_user_data_to_front' );
         
+        $this->loader->add_action('wp_ajax_update_favorite_food_and_drink', $module_ajax, 'update_favorite_food_and_drink');
 
         // AJAX hooks go here:
-        $this->loader->add_action( 'wp_ajax_change_user_meta_ajax_callback', $module_ajax, 'change_user_meta_ajax_callback' );
+        // $this->loader->add_action( 'wp_ajax_send_user_data_to_front', $module_ajax, 'send_user_data_to_front' );
         
 
 
